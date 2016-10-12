@@ -34,3 +34,4 @@ public class Judge {
     }
 
 }
+B2
