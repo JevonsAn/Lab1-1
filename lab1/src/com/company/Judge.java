@@ -1,4 +1,4 @@
-package com.company;
+﻿package com.company;
 import  java.util.regex.*;
 /**
  * Created by 56363 on 2016/9/20.
@@ -24,7 +24,7 @@ public class Judge {
         Pattern pattern3 = Pattern.compile("\\s|\\.|@|#|$|%|&|,|:|\"");
         Matcher matcher3 = pattern3.matcher(s);
         //b = matcher3.find();
-        b = s.matches("\\s|\\.|@|#|$|%|&|,|:");
+        b = matcher3.matches();
         if(b)
         {
             return -1;  //返回-1代表表达式非法

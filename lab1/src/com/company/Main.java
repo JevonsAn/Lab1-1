@@ -1,16 +1,14 @@
-package com.company;
+﻿package com.company;
 import java.util.Scanner;
-import com.company.compute;
-import com.company.derivative;
 import com.company.Judge;
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
 	// write your code here
         try
         {
-            compute Computer = new compute();
-            derivative Derivativer = new derivative();
+            Compute Computer = new Compute();
+            Derivative Derivativer = new Derivative();
             Judge judger = new Judge(); //用来判断输入的字符串类型
             Scanner scanner = new Scanner(System.in);
             while(true)
@@ -22,12 +20,12 @@ public class Main {
                     //判断出是求导命令后
                     System.out.println(Derivativer.io(Computer.express_just,s));
                 }
-                else if(res == 1)
+                else if( res == 1)
                 {
                     //判断出是化简命令
                     //System.out.println("huajian");
-                    Computer.simple_conpute(s);
-                    System.out.println(Computer.compute_suffix());
+                    Computer.simpleConpute(s);
+                    System.out.print(Computer.computeSuffix());
                 }
                 else if(res == -1)
                 {
@@ -38,8 +36,8 @@ public class Main {
                 {
                     //判断出是正常表达式
                     //System.out.println("zhengchang");
-                    Computer.MiddleTolast(s);
-                    System.out.println(Computer.compute_suffix());
+                    Computer.middleTolast(s);
+                    System.out.println(Computer.computeSuffix());
 
                 }
 

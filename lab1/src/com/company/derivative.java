@@ -1,33 +1,31 @@
-package com.company;
+﻿package com.company;
 
 import java.util.*;
 //Considering the conflict of different encoding, the annotation will be in English.
 //Sorry for the inconvenience
 
-public class derivative
+public class Derivative
 {
     //this method is used for independent test
-	/*
+    /*
      *
-	   public static void main(String args[])
-	{
-		String formula = "(3x^3+4z)*3z^2+5xyd^6+x*4z-(3*z^3+4*y+3*z)*(45+z)*(5*z+2)-z^2-z*6z+z";//"(3x^3+4x)*3x^2+5x^6+x*4x";
-		//String formula = "(3x^3+4z)*3z^2";
-		String instr = "!d/d xyd";
-		String deri;
-		ArrayList<String> varialist = new ArrayList<String>();
-		varialist = getVaria(formula); //get the variable array
-		formula = addmul(formula);
-		deri = varialist.get(getSVaria(instr, varialist));
-		System.out.println("Original expression:"+formula);
-		System.out.println("Take the deviation of "+deri);
-		System.out.println("Result:"+diff(formula, deri));
-	}
-	 */
+     *public static void main(String args[])	{ String formula = 
+     *"(3x^3+4z)*3z^2+5xyd^6+x*4z-(3*z^3+4*y+3*z)*(45+z)*(5*z+2)-z^2-z*6z+z";//"(3x^3+4x)*3x^2+5x^6+x*4x";
+     *//String formula = "(3x^3+4z)*3z^2";
+     *String instr = "!d/d xyd";
+     *String deri;
+     *ArrayList<String> varialist = new ArrayList<String>();
+     *varialist = getVaria(formula); //get the variable array
+     *formula = addmul(formula);
+     *deri = varialist.get(getSVaria(instr, varialist));
+     *System.out.println("Original expression:"+formula);
+     *System.out.println("Take the deviation of "+deri);
+     *System.out.println("Result:"+diff(formula, deri));}
+     */
 
     /*
-     * this method is used to be connected to other classes, almost same as main method
-
+     * this method is used to be connected to other classes, almost same as main    
+     *method
      */
     public static String io (String formula, String instr)
     {
@@ -44,8 +42,8 @@ public class derivative
 
     /*
      * "getVaria" method is used to get all the variables in the expression string
-       parameter: String ori, expression string
-       return: ArrayList<String>, a list of unduplicated variables
+     * parameter: String ori, expression string
+     * return: ArrayList<String>, a list of unduplicated variables
      */
     private static ArrayList<String> getVaria (String ori)
     {
@@ -95,12 +93,12 @@ public class derivative
         return vlist;
     }
 
-    /*
-     * "getSVaria" is used to get the variable in the instruction
-       parameter: String ins, the instruction, like "d/d x"
-                  ArrayList<String> vlist, the generated list of variable from method "getVaria"
-       return: Integer locat, the location of the variable in the instruction in the ArrayList
-     */
+	/*
+	 * "getSVaria" is used to get the variable in the instruction parameter:
+	 * String ins, the instruction, like "d/d x" ArrayList<String> vlist, the
+	 * generated list of variable from method "getVaria" return: Integer locat,
+	 * the location of the variable in the instruction in the ArrayList
+	 */
     private static Integer getSVaria (String ins, ArrayList<String> vlist)
     {
         int varialen = ins.length();
@@ -119,20 +117,18 @@ public class derivative
         return locat;
     }
 
-    /*
-     * "split" method is used to split an expression by '+' or '-' which is outside the brackets and store the operators
-       parameter: String str, an expression
-       return: ret pack, a custom class, more information in "class ret"
-       example: i:String str:(3*x+y)*5+4*y-6*x-(9*x^2-2)
-                o:pack.stt:[(3*x+y)*5, 4*y, 6*x, (9*x^2-2)]
-                  pack.sym:[+,-,-]
-                  pack.flnon:0
-     */
-    private static ret split (String str)
+  /*
+	 * "split" method is used to split an expression by '+' or '-' which is
+	 * outside the brackets and store the operators parameter: String str, an
+	 * expression return: ret pack, a custom class, more information in
+	 * "class ret" example: i:String str:(3*x+y)*5+4*y-6*x-(9*x^2-2)
+	 * o:pack.stt:[(3*x+y)*5, 4*y, 6*x, (9*x^2-2)] pack.sym:[+,-,-] pack.flnon:0
+	 */
+    private static Ret split (String str)
     {
         ArrayList<String> stt = new ArrayList<String>();
         ArrayList<String> sym = new ArrayList<String>();
-        ret pack = new ret();
+        Ret pack = new Ret();
         List<Integer> arr = new ArrayList<Integer>();//plus operator
         List<Integer> arrm = new ArrayList<Integer>();//minus operator
         List<Integer> arra = new ArrayList<Integer>();//both operators
@@ -193,11 +189,11 @@ public class derivative
         return pack;
     }
 
-    /*
-     * "addmul" method is used to add multiplication between num and letter or between brackets
-       parameter: String str, original expression
-       return: String, expression with all multiplications
-     */
+    	/*
+	 * "addmul" method is used to add multiplication between num and letter or
+	 * between brackets parameter: String str, original expression return:
+	 * String, expression with all multiplications
+	 */
     private static String addmul (String str)
     {
         StringBuilder sttb = new StringBuilder(str);
@@ -243,17 +239,16 @@ public class derivative
         return sttb.toString();
     }
 
-    /*
-     * "diff" method is used to take the deviation of the variable
-        parameter: String str, expression
-                   String va, the variable
-     */
+    	/*
+	 * "diff" method is used to take the deviation of the variable parameter:
+	 * String str, expression String va, the variable
+	 */
     private static String diff (String str, String va)
     {
         ArrayList<String> splitRes = new ArrayList<String>();
         ArrayList<String> sym = new ArrayList<String>();
         StringBuilder result = new StringBuilder();
-        ret proc = split(str);
+        Ret proc = split(str);
         splitRes = proc.stt; //split result, list from the split
         sym = proc.sym; //operational symbols, list from the split
         String tp = "";
@@ -336,13 +331,13 @@ public class derivative
     }
 
     /*
-     * "diFir" method is used to get the deviation of elementary expression, aka with no operator in the outlayer or bracket
-        example: for like "3*x" or "3*y^2*x", not for "(4*y-3)*y" or "5+4y"
-        parameter: String str, elementary expression
-                   String va, variable in the deviation
-                   int fl, operator flag, 0 for '+' and 1 for '-'
-        return: String, result of deviation
-     */
+	 * "diFir" method is used to get the deviation of elementary expression, aka
+	 * with no operator in the outlayer or bracket example: for like "3*x" or
+	 * "3*y^2*x", not for "(4*y-3)*y" or "5+4y" parameter: String str,
+	 * elementary expression String va, variable in the deviation int fl,
+	 * operator flag, 0 for '+' and 1 for '-' return: String, result of
+	 * deviation
+	 */
     private static String diFir (String str, String va, int fl)
     {
         StringBuilder out =  new StringBuilder();
@@ -578,29 +573,22 @@ public class derivative
     }
 
 	/*
-	 * private static String demul (String str)
-	{
-		StringBuilder fin = new StringBuilder(str);
-		char tp[] = str.toCharArray();
-		for (int i = 0; i < str.length(); i ++)
-		{
-			if (i < str.length()-1)
-			{
-				if (Character.isDigit(str.charAt(i)))
-				{
-
-				}
-			}
-		}
-
-		return ;
-	}
+	 * private static String demul (String str) { StringBuilder fin = new
+	 * StringBuilder(str); char tp[] = str.toCharArray(); for (int i = 0; i <
+	 * str.length(); i ++) { if (i < str.length()-1) { if
+	 * (Character.isDigit(str.charAt(i))) {
+	 * 
+	 * } } }
+	 * 
+	 * return ; }
 	 */
 
 }
-class ret
+class Ret
 {
     ArrayList<String> stt = new ArrayList<String>();//store the results after split
     ArrayList<String> sym = new ArrayList<String>();//store the operators
     int flnon;//flag for operators
+    Ret(){
+    }
 }

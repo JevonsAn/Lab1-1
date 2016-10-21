@@ -1,15 +1,16 @@
-package com.company;
+﻿package com.company;
 
 import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class compute {
+public class Compute {
 
     StringBuilder suffix;// 存储转换后的后缀表达式
     StringBuilder com;// 存储计算结果
     String express_just;//存储原装的表达式
-    StringBuilder MiddleTolast(String text) {
+
+    StringBuilder middleTolast(String text) {
         /*表达式中缀转后缀*/
         this.express_just = text;
         StringBuilder cal = new StringBuilder();
@@ -36,8 +37,9 @@ public class compute {
                     }
                 }
             } else if (cal.charAt(i) == '+' || cal.charAt(i) == '-' || cal.charAt(i) == '*' || cal.charAt(i) == '/') {
-                while (!sk.empty() && !sk.peek().equals("(")// 在这里比较优先级，如果栈内的运算符优先级高于外界，那么一直弹栈到低了为止
-                        && this.compute_priority(sk.peek()) >= this.compute_priority(cal.charAt(i))) {
+                while (!sk.empty() 
+			&& !sk.peek().equals("(")// 在这里比较优先级，如果栈内的运算符优先级高于外界，那么一直弹栈到低了为止
+                        && this.computePriority(sk.peek()) >= this.computePriority(cal.charAt(i))) {
                     result.append("#" + sk.pop() + "#");
                 }
                 sk.push(Character.toString(cal.charAt(i)));
@@ -87,8 +89,11 @@ public class compute {
             temp.delete(0, ch.length());
             while (startindex >= 0) {
                 // 找起点位置
-                if (ch.charAt(startindex) == '+' || ch.charAt(startindex) == '-' || ch.charAt(startindex) == '*'
-                        || ch.charAt(startindex) == '/' || ch.charAt(startindex) == '('
+                if (ch.charAt(startindex) == '+' 
+			|| ch.charAt(startindex) == '-' 
+			|| ch.charAt(startindex) == '*'
+                        || ch.charAt(startindex) == '/' 
+			|| ch.charAt(startindex) == '('
                         || Character.isDigit(ch.charAt(startindex))) {
                     break;
                 }
@@ -99,8 +104,10 @@ public class compute {
             }
             while (endindex < ch.length()) {
                 // 找终点位置
-                if (ch.charAt(endindex) == '+' || ch.charAt(endindex) == '-' || ch.charAt(endindex) == '*'
-                        || ch.charAt(endindex) == '/' || ch.charAt(endindex) == ')') {
+                if (ch.charAt(endindex) == '+' || ch.charAt(endindex) == '-' 
+			|| ch.charAt(endindex) == '*'
+                        || ch.charAt(endindex) == '/' 
+			|| ch.charAt(endindex) == ')') {
                     break;
                 }
                 endindex++;
@@ -116,7 +123,7 @@ public class compute {
         return ch;
     }
 
-    StringBuilder compute_suffix() {
+    StringBuilder computeSuffix() {
         /*对后缀表达式进行计算，如果是数值就直接计算，如果是字母就接着存到表达式中*/
         Stack<String> sk = new Stack<String>();
         StringBuilder temp = new StringBuilder();
@@ -199,7 +206,7 @@ public class compute {
         return result;
     }
 
-    StringBuilder simple_conpute(String code) {
+    StringBuilder simpleConpute(String code) {
         StringBuilder temp = new StringBuilder();
         StringBuilder result = new StringBuilder();
         String[] arr;
@@ -229,7 +236,7 @@ public class compute {
         return true;
     }
     //下面三个方法是同一个方法的重载，都是计算运算符优先级的。
-    int compute_priority(StringBuilder p) {
+    int computePriority(StringBuilder p) {
         if (p.equals("+") || p.equals("-")) {
             return 1;
         } else if (p.equals("*") || p.equals("/")) {
@@ -241,7 +248,7 @@ public class compute {
         }
     }
 
-    int compute_priority(String p) {
+    int computePriority(String p) {
         if (p.equals("+") || p.equals("-")) {
             return 1;
         } else if (p.equals("/") || p.equals("/")) {
@@ -253,7 +260,7 @@ public class compute {
         }
     }
 
-    int compute_priority(Character p) {
+    int computePriority(Character p) {
         if (p.equals('+') || p.equals('-')) {
             return 1;
         } else if (p.equals('*') || p.equals('/')) {
